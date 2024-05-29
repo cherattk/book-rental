@@ -1,0 +1,136 @@
+﻿@model System.Data.DataTable
+@{
+  ViewBag.Title = "Index";
+}
+
+<div class="container">
+
+  @if (ViewBag.Erreur != null)
+  {
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      @ViewBag.Erreur
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  }
+
+  @if (ViewBag.Message != null)
+  {
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      @ViewBag.Message
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+  }
+
+  <div class="banner container">
+    <img src="/Content/images/banniere.jpg"
+         class="shadow-sm border rounded w-100 d-block" />
+    <div class="banner-text py-5 text-center">
+      <h1 class="bg-light mb-5 py-3 rounded text-primary">
+        En Vedette
+      </h1>
+
+      <!-- Liste des livres -->
+      <div class="liste-livre">
+        <div class="container">
+          <div class="row">
+            @for (int i = 0; i < Model.Rows.Count; i++)
+            {
+              <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                <div class="card shadow-sm p-1 livre-card">
+                  <div class="overflow-hidden py-3">
+                    <img src="/Content/livre-image/@(Model.Rows[i][8] + ".jpg")"
+                         class="w-100" />
+                  </div>
+
+                  <h6 class="titre">
+                    <!-- Titre -->
+                    @if (Model.Rows[i][1].ToString().Length > 30)
+                    {
+                      @(Model.Rows[i][1].ToString().Substring(0, 30) + "...")
+                    }
+                    else
+                    {
+                      @Model.Rows[i][1]
+                    }
+
+                  </h6>
+
+                  <!-- auteur -->
+                  <p>By @Model.Rows[i][2]</p>
+
+                  <!-- nombre de page -->
+                  <p>Pages : @Model.Rows[i][3]</p>
+
+
+
+                  @if (Session["user"] != null)
+                  {
+                    BookRental.Models.UserProfile profile = Session["user"] as BookRental.Models.UserProfile;
+                    if (profile.Role == "membre")
+                    {
+
+                      if (@ViewBag.userPrets.Contains(@Model.Rows[i][0].ToString()))
+                      {
+                        <p class="m-0 p-2 text-bg-success">
+                          Reserv&eacute;
+                          <i class="fas fa-check"></i>
+                        </p>
+                      }
+                      else
+                      {
+                        <a href="/Pret/Reserver?livreId=@Model.Rows[i][0]"
+                           class="p-2 btn btn-sm btn-warning">
+                          <span>R&eacute;server</span>
+                        </a>
+                      }
+                    }
+                    else
+                    {
+                      <button class="btn btn-sm btn-warning"
+                              onclick="messageInvitationConnection(1);">
+                        R&eacute;server
+                      </button>
+                    }
+                  }
+                  else
+                  {
+                    <button class="btn btn-sm btn-warning"
+                            onclick="messageInvitationConnection();">
+                      R&eacute;server
+                    </button>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="ModalAlert" tabindex="-1" aria-labelledby="ModalAlertLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalAlertLabel">Message</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="modal-alert-message" class="alert alert-info">Message Alert</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/Content/js/labo2.js?@DateTime.Now.Millisecond"></script>
+
+</div>
+

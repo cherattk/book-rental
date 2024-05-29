@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Book Rental - @ViewBag.Title</title>
+
+	@Styles.Render("~/Content/css")
+
+	<link rel="stylesheet" href="/Content/css/labo2.css">
+	<link rel="stylesheet" href="/Content/css/board.css">
+	<link rel="stylesheet" href="/Content/css/responsive.css">
+	<link rel="stylesheet" href="/Content/fontawesome-free-5.12.1-web/css/all.min.css" />
+
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
+
+</head>
+
+@{ string loginFormCss = "";}
+@if (Context.Request.Path == "/Login/Login")
+{
+	loginFormCss = "d-flex flex-column";
+}
+<body class="@loginFormCss">
+
+	<div class="d-flex main-div pb-5">
+
+		<div class="main-menu p-3 bg-light">
+			<a href="@Url.Action("Index" , "Website")"
+			   class="border-bottom d-flex mb-3 pb-3 text-decoration-none">
+        <h1 class="ms-2" style="font-size:1rem">
+          <i class="fas fa-book-reader me-2" style="font-size:2.3rem"></i>
+          Bibliot&#234;que
+        </h1>
+			</a>
+			<ul class="nav nav-pills flex-column mb-auto">
+
+				@{ string path = Context.Request.Path.ToLower();}
+				<li class="nav-item">
+					<a href="@Url.Action("Livres")" class="@((@path == "/admin/livres") ? "nav-link active" : "nav-link")">
+						<i class="fas fa-book me-2"></i>
+						<span>Livres</span>
+					</a>
+				</li>
+				<li>
+					<a href="@Url.Action("Prets")" class="@((@path == "/admin/prets") ? "nav-link active" : "nav-link")">
+						<i class="fas fa-exchange-alt me-2"></i>
+						<span>Prets</span>
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a href="@Url.Action("Membres")" class="@((@path == "/admin/membres") ? "nav-link active" : "nav-link")">
+						<i class="fas fa-user me-2"></i>
+						<span>Membres</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="main-content w-100 px-4">
+
+			<header class="border-bottom text-end container py-3">
+				<a href="/Login/Logout" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+					Deconnection
+				</a>
+			</header>
+
+			@if (ViewBag.Erreur != null)
+			{
+				<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					@ViewBag.Erreur
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+				
+			}
+
+			@if (ViewBag.Message != null)
+			{
+				<div class="alert alert-success alert-dismissible fade show" role="alert">
+					@ViewBag.Message
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+
+			}
+
+			
+
+			@RenderBody()
+
+		</div>
+
+	</div>
+
+	@*<footer class="border-top bg-light text-center">
+			<div class="container py-5">
+				<p>&copy; @DateTime.Now.Year - Karim Cheratt</p>
+			</div>
+		</footer>*@
+
+	<script src="/Content/js/labo2.js"></script>
+</body>
+</html>

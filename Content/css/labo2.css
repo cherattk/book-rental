@@ -1,0 +1,53 @@
+/* 
+    IFT-1148 - TP2
+    Karim Cheratt
+*/
+
+html , body{
+    height:100%;
+}
+body {
+    background: #fff;
+}
+
+header {
+    /* border-bottom: 1px solid #ebe8e8; */
+    /* box-shadow: 0 1px 5px #f2f1f1; */
+}
+
+footer {
+    margin: 5rem 0 0 0;
+}
+/*************** Home Page ****************/
+.snip-feature {
+    padding: 5rem 0;
+    border-top: 2px solid #eff4f8;
+}
+
+.snip-image img {
+    width: 100%;
+}
+
+/****** liste livre ****/
+.livre-card:hover{
+    color:#3F51B5;
+    cursor:pointer;
+    box-shadow:0 2px 10px #ccc !important;
+}
+.livre-card:hover .titre{  
+    text-decoration:underline;
+}
+
+/**** Tableau livre admin ***/
+.table-retard-admin th , 
+.table-retard-admin td{
+    width: calc(100%/8);
+}
+
+
+/********* login form ***********/
+.login-form{
+    max-width:500px;
+}
+
+

@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Rental - @ViewBag.Title</title>
+
+  @Styles.Render("~/Content/css")
+
+  <link rel="stylesheet" href="/Content/css/labo2.css?@DateTime.Now.Millisecond">
+  <link rel="stylesheet" href="/Content/css/responsive.css?@DateTime.Now.Millisecond">
+  <link rel="stylesheet" href="/Content/fontawesome-free-5.12.1-web/css/all.min.css" />
+
+</head>
+
+
+@{ string loginFormCss = "";}
+@if (Context.Request.Path == "/Login/Login")
+{
+  loginFormCss = "d-flex flex-column";
+}
+<body class="@loginFormCss">
+  <header class="border-bottom container mb-4 py-3">
+    <div class="container text-primary d-flex flex-wrap justify-content-between">
+      <a href="@Url.Action("Index" , "Website")" class="text-decoration-none d-flex">
+        <i class="fas fa-book-reader me-2" style="font-size:2.3rem"></i>
+        <h1 class="ms-2" style="font-size:1rem">
+          Bibliot&#234;que
+        </h1>
+      </a>
+      <div class="align-items-center d-flex">
+        @if (Session["user"] != null)
+        {
+          BookRental.Models.UserProfile profile = Session["user"] as BookRental.Models.UserProfile;
+          string UserPage = profile.Role.ToString();
+          <a href="/@UserPage" class="btn btn-sm btn-outline-primary me-3 rounded-pill px-3">
+            <i class="fas fa-user me-2"></i>
+            @profile.Name - @profile.Prenom
+            /
+            @if (profile.Role == "admin")
+            {
+              <span>Admin</span>
+            }
+            else
+            {
+              <span>Mes R&eacute;servations</span>
+            }
+          </a>
+          <a href="/Login/Logout" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+            Deconnection
+          </a>
+        }
+        else if (Context.Request.Path != "/Login/Index")
+        {
+          <a href="/Login/Index" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+            <i class="fas fa-user me-2"></i>
+            Connection
+          </a>
+          @*<a href="/Login/Index?user=admin" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+              <i class="fas fa-user me-2"></i>
+              Dev Connection Admin
+            </a>
+            <a href="/Login/Index" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+              <i class="fas fa-user me-2"></i>
+              Dev Connection Membre
+            </a>*@
+        }
+      </div>
+    </div>
+  </header>
+
+  @RenderBody()
+
+  <footer class="border-top bg-light text-center">
+    <div class="container py-5">
+      <p>&copy; 2023 - Karim Cheratt</p>
+    </div>
+  </footer>
+
+  @Scripts.Render("~/bundles/jquery")
+  @Scripts.Render("~/bundles/bootstrap")
+  @RenderSection("scripts", required: false)
+</body>
+</html>

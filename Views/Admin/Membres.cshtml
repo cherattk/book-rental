@@ -1,0 +1,39 @@
+﻿@model System.Data.DataTable
+
+@{
+	ViewBag.Title = "Membre";
+	Layout = "~/Views/Admin/Layout.cshtml";
+}
+
+<h2 class="bg-light h3 mb-3 my-3 p-3 text-primary">Gestion des Membres</h2>
+
+<div class="ui-table">
+	<div class="ui-row ui-row-header bg-gradient text-bg-primary">
+		<div class="ui-cell"> Nom </div>
+		<div class="ui-cell"> Prenom </div>
+		<div class="ui-cell"> telephone </div>
+		<div class="ui-cell"> Courriel </div>
+		<div class="ui-cell"> Adresse </div>
+	</div>
+	@for (int i = 0; i < Model.Rows.Count; i++)
+	{
+	<div class="ui-row">
+		<div class="ui-cell align-top" data-title="Retour Le Livre">
+			@Model.Rows[i][1]
+		</div>
+		<div class="ui-cell align-top" data-title="Titre">
+			@Model.Rows[i][2]
+		</div>
+		<div class="ui-cell align-top" data-title="Titre">
+			@Model.Rows[i][4]
+		</div>
+		<div class="ui-cell align-top" data-title="Titre">
+			@Model.Rows[i][5]
+		</div>
+		<div class="ui-cell align-top" data-title="Titre">
+			@Model.Rows[i][3]
+		</div>
+	</div> <!-- Fin ROW -->
+	}
+</div>
+

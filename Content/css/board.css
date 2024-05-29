@@ -1,0 +1,95 @@
+body , html{
+  width:100%;
+  height:100%;
+}
+
+.main-div{
+  height: 100%;
+}
+
+.main-content{
+  width:100%;
+  height:100%;
+  overflow: auto;
+}
+
+.main-menu-nav{
+  overflow:hidden;
+}
+.main-menu-nav .nav-link.active + .nav-item-list{
+  max-height:500px;
+  height:auto;
+}
+.main-menu-nav .nav-item-list{
+  max-height:0px;
+  overflow:hidden;
+  transition:max-height 1s;
+}
+.main-menu-nav > .btn:focus{
+  box-shadow:none !important;
+  border-color:#ffffff;
+}
+.main-menu-nav > .btn.active{
+  background-color:#2196F3 !important;
+  color:#ffffff !important;
+}
+
+/***************************************************/
+.select-date-div input[type="date"]{
+  width:0px;
+}
+.main-menu{
+  width:280px;
+  height: 100%;
+  overflow: auto;
+}
+/******************************************** 
+RDV FORM
+*********************************************/
+#rdv-form textarea{
+  height:150px;
+}
+/********************************************
+  RDV CARD
+*********************************************/
+.rdv-content ul{
+  list-style-type:none;
+}
+.rdv-content ul li{
+  padding:0;
+  margin:0;
+}
+
+/****************************************************
+  DROPDOWN WIDGET
+*****************************************************/
+.dropdown-content{
+  display:none;
+}
+.dropdown-btn{
+  display:none;
+}
+.dropdown-btn:checked + label{
+  border-radius:0.25rem 0.25rem 0rem 0rem !important;
+}
+.dropdown-btn + label .icon-close{
+  display:none;
+} 
+.dropdown-btn:checked + label .icon-open{
+  display:none;
+}
+.dropdown-btn:checked + label .icon-close{
+  display:inline-block;
+} 
+
+.dropdown-btn:checked ~ .dropdown-content{
+  display:block;
+}
+
+
+/************************************************
+  MOBILE
+************************************************/
+@media (max-width: 576px) {
+  
+}

@@ -1,0 +1,72 @@
+﻿@model System.Data.DataTable
+
+@{
+	ViewBag.Title = "Espace Membre";
+}
+
+<div class="container">
+
+	<h3 class="text-primary mb-3">Mes R&eacute;servations : </h3>
+
+	<!-- Liste des prets -->
+	<div class="ui-table table-pret-membre">
+		<div class="ui-row ui-row-header bg-gradient text-bg-primary">
+			<div class="ui-cell"> Image </div>
+			<div class="ui-cell"> Titre </div>
+			<div class="ui-cell"> Date du Pret </div>
+			<div class="ui-cell"> Retour Prevue </div>
+			<div class="ui-cell"> Retour Effective </div>
+			<div class="ui-cell"> Nb. Jours Retard </div>
+			<div class="ui-cell"> Frais De Retard ($) </div>
+		</div>
+		@for (int i = 0; i < Model.Rows.Count; i++)
+		{
+			<div class="ui-row">
+				<div class="ui-cell" data-title="Image">
+					<div class="overflow-hidden">
+						<img src="/Content/livre-image/@(Model.Rows[i][1] + ".jpg")" />
+					</div>
+				</div>
+				<div class="ui-cell align-top" data-title="Titre">
+					<!-- Titre -->
+					@Model.Rows[i][2]
+				</div>
+				<div class="ui-cell" data-title="Date du Pret">
+					<!-- Date du Pret -->
+					@Model.Rows[i][3].ToString().Replace("12:00:00 AM", "")
+				</div>
+				<div class="ui-cell" data-title="Date Retour Prevue">
+					<!-- Retour Prevue -->
+					@Model.Rows[i][4].ToString().Replace("12:00:00 AM", "")
+				</div>
+				<div class="ui-cell" data-title="Date Retour Effectif">
+					<!-- Date Retour Effectif  -->
+					@if (!Convert.IsDBNull(Model.Rows[i][5]))
+					{
+						<span class="badge bg-success">@Model.Rows[i][5].ToString().Replace("12:00:00 AM", "")</span>
+					}
+					else { <span class="bg-warning py-1 px-2 rounded text-bg-warning">En Attente</span> }
+				</div>
+				<div class="ui-cell" data-title="Nb. Jours Retard">
+					<!-- Nbr jour retard  -->
+					@if (!Convert.IsDBNull(Model.Rows[i][6]))
+					{
+						<span class="badge bg-danger">@Model.Rows[i][6]</span>
+					}
+					else { <span>0</span> }
+
+				</div>
+				<div class="ui-cell" data-title="Frais">
+					<!--Frais de Retard  -->
+					@if (!Convert.IsDBNull(Model.Rows[i][7]))
+					{
+						@Model.Rows[i][7]
+					}
+					else { <span>0</span>}
+
+				</div>
+			</div> <!-- Fin ROW -->
+		}
+	</div>
+
+</div>

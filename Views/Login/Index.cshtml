@@ -1,0 +1,43 @@
+﻿
+@{ 
+	Layout = "~/Views/Login/Layout.cshtml";
+}
+<div class="container login-form h-100">
+	@if(ViewBag.Error != null)
+	{
+		<div class="alert alert-danger">@ViewBag.Error</div>
+	}
+	<h2 class="my-4 text-primary">Connection</h2>
+	<form action="/Login/Login" method="POST">
+		<div class="form-group mb-3">
+			<label for="user_email" class="text-primary">Courriel</label>
+			<input type="email" class="form-control" required
+				   id="user_email"
+				   name="user_email"
+				   aria-describedby="emailHelp" placeholder="Courriel de l'UdeM">
+		</div>
+		<div class="form-group mb-3">
+			<label for="user_pass" class="text-primary">Mot de Passe</label>
+			<input type="password" class="form-control" required
+				   id="user_pass"
+				   name="user_pass"
+				   placeholder="Mot de Passe">
+		</div>
+		<button type="submit" class="btn btn-primary">Connection</button>
+
+		<p class="border my-3 bg-light p-3">
+			Compte Test<br />
+			Membre : <br />
+			email : membre@email.com <br />
+			password : membre<br />
+			<br />
+			Administrateur : <br />
+			email : admin@email.com  <br />
+			password : admin
+		</p>
+	</form>
+</div>
+
+
+
+

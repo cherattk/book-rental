@@ -1,0 +1,45 @@
+﻿@model System.Data.DataTable
+
+@{
+	ViewBag.Title = "Livres";
+	Layout = "~/Views/Admin/Layout.cshtml";
+}
+
+<h2 class="bg-light h3 mb-3 my-3 p-3 text-primary">Gestion des Livres</h2>
+
+<div class="ui-table">
+	<div class="ui-row ui-row-header bg-gradient text-bg-primary">
+		<div class="ui-cell"> Image </div>
+		<div class="ui-cell"> Titre </div>
+		<div class="ui-cell"> Auteur </div>
+		<div class="ui-cell"> Cat&eacute;gorie </div>
+		<div class="ui-cell"> Quantit&eacute; </div>
+		<div class="ui-cell"> Action </div>
+	</div>
+	@for (int i = 0; i < Model.Rows.Count; i++)
+	{
+		<div class="ui-row">
+			<div class="ui-cell align-top" data-title="Image">
+				<img src="/Content/livre-image/@(Model.Rows[i][8] + ".jpg")" />
+			</div>
+			<div class="ui-cell align-top" data-title="Titre">
+				@Model.Rows[i][1]
+			</div>
+			<div class="ui-cell align-top" data-title="Auteur">
+				@Model.Rows[i][2]
+			</div>
+			<div class="ui-cell align-top" data-title="Categorie">
+				@Model.Rows[i][6]
+			</div>
+			<div class="ui-cell align-top" data-title="Disponible">
+				@Model.Rows[i][10]
+			</div>
+			<div class="ui-cell align-top" data-title="Action">
+				<button type="button" class="btn btn-sm btn-primary">
+					<i class="fas fa-pen"></i>
+				</button>
+			</div>
+		</div> <!-- Fin ROW -->
+	}
+</div>
+
